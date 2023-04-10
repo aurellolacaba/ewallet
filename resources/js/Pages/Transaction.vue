@@ -28,7 +28,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="border-b " v-for="transaction in transactions.data">
-                                            <td class="whitespace-nowrap px-6 py-4">{{ transaction.updated_at }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ formatDate(transaction.updated_at) }}</td>
                                             <td class="whitespace-nowrap px-6 py-4">{{ transaction.reference_number }}</td>
                                             <template v-if="transaction.from.id == $page.props.auth.user.id">
                                                 <td class="whitespace-nowrap px-6 py-4">Transfer To</td>
@@ -117,4 +117,13 @@
     defineProps({
         transactions: Object
     })
+
+    const formatDate = (date) => {
+        return Intl.DateTimeFormat(
+            'en', 
+            { dateStyle: 'medium' }
+        ).format(
+            Date.parse('2023-04-10T06:04:40.000000Z')
+        )
+    }
 </script>
