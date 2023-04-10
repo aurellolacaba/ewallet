@@ -72,7 +72,7 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center mt-4 mb-4">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -84,6 +84,12 @@ const submit = () => {
                 <PrimaryButton id="login" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>
+
+                <!-- buttonLink -->
+                
+            </div>
+            <div class="flex justify-center">
+                <a class="px-4 py-2 bg-blue-600 rounded-md text-white" href="/auth/facebook/redirect">Login with Facebook</a>
             </div>
         </form>
     </GuestLayout>
