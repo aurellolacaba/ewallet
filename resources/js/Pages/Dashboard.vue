@@ -22,13 +22,44 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Recent Activities Component -->
                 <div class="text-lg mb-5 font-semibold text-gray-900 "> Recent activity</div>
+                
                 <div v-for="transaction in transactions">
-                    <template v-if="transaction.from == $page.props.auth.user.id">
-                        <span class=" text-red-500 font-bold">-{{ transaction.amount }} PHP</span> <span class=" text-gray-900">Sent <span class=" text-gray-500">{{ transaction.diffForHumans }}</span></span> 
+                    <template v-if="transaction.from.id == $page.props.auth.user.id">
+                        <div class="flex justify-between bg-white p-3 w-96 rounded-lg mb-3">
+                            <div class="flex flex-row space-x-3 ">
+                                <img class=" rounded-full aspect-square" :src="`https://eu.ui-avatars.com/api/?name=${transaction.to.name}John+Doe&size=50`" alt="">
+                                <div>
+                                    <p class="font-bold text-gray-700">{{ transaction.to.name }}</p>
+                                    <p class="font-semibold text-gray-400 text-sm">Sent</p>
+                                </div>
+                            </div>
+                            
+
+                            <div>
+                                <p class="font-bold text-sm text-red-500">-{{ transaction.amount }} PHP</p>
+                                <p class="text-xs text-gray-400">{{ transaction.diffForHumans }}</p>
+                            </div>
+                        </div>
+
+                        <!-- <span class=" text-red-500 font-bold">-{{ transaction.amount }} PHP</span> <span class=" text-gray-900">Sent <span class=" text-gray-500">{{ transaction.diffForHumans }}</span></span>  -->
                     </template>
 
-                    <template v-else-if="transaction.to == $page.props.auth.user.id">
-                        <span class=" text-green-500 font-bold">+{{ transaction.amount }} PHP</span> <span class=" text-gray-900">Received <span class=" text-gray-500">{{ transaction.diffForHumans }}</span></span> 
+                    <template v-else-if="transaction.to.id == $page.props.auth.user.id">
+                        <div class="flex justify-between bg-white p-3 w-96 rounded-lg mb-3">
+                            <div class="flex flex-row space-x-3 ">
+                                <img class=" rounded-full aspect-square" :src="`https://eu.ui-avatars.com/api/?name=${transaction.from.name}&size=50`" alt="">
+                                <div>
+                                    <p class="font-bold text-gray-700">{{ transaction.from.name }}</p>
+                                    <p class="font-semibold text-gray-400 text-sm">Received</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class=" font-bold text-sm text-green-500">+{{ transaction.amount }} PHP</p>
+                                <p class="text-xs text-gray-400">{{ transaction.diffForHumans }}</p>
+                            </div>
+                        </div>
+
+                        <!-- <span class=" text-green-500 font-bold">+{{ transaction.amount }} PHP</span> <span class=" text-gray-900">Received <span class=" text-gray-500">{{ transaction.diffForHumans }}</span></span>  -->
                     </template>
                 </div>
                 
