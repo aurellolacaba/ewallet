@@ -16,6 +16,7 @@
                 <div class="flex flex-row space-x-4">
                     <button class="px-6 py-2 rounded-lg text-white bg-gray-800" @click="showSendModal">Send</button>
                     <button class="px-6 py-2 rounded-lg text-white bg-gray-800">Request</button>
+                    <Link href="/cash-in" method="post" as="button" type="button">Cash in</Link>
                 </div>
                 
             </div>
@@ -115,7 +116,7 @@
     import SecondaryButton from '@/Components/SecondaryButton.vue';
     import TextInput from '@/Components/TextInput.vue';
     import InputError from '@/Components/InputError.vue';
-    import { useForm } from '@inertiajs/vue3';
+    import { useForm, Link } from '@inertiajs/vue3';
     import { ref } from 'vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
 

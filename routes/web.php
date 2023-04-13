@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Auth\FacebookAuthController;
+use App\Http\Controllers\CashInController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,7 @@ Route::get('/auth/facebook/callback', [FacebookAuthController::class, 'handleCal
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/transactions', [TransactionController::class, 'index'])->middleware(['auth', 'verified'])->name('transactions');
 Route::post('/send', [DashboardController::class, 'send'])->middleware(['auth', 'verified'])->name('send');
+Route::post('/cash-in', [CashInController::class, 'index'])->middleware(['auth', 'verified'])->name('cashin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
