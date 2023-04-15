@@ -8,9 +8,8 @@ use Inertia\Inertia;
 
 class CashInController extends Controller
 {
-    public function index(){
-        $payment = new Payment('paypal');
-        $payment->arguments([
+    public function index(Payment $payment){
+        $args = [
             'amount' => 100,
             'billing' => [
                 'name' => 'John Doe',
@@ -19,8 +18,10 @@ class CashInController extends Controller
             'metadata' => [
                 'reference_id' => 'd9f80740-38f0-11e8-b467-0ed5f89f718b'
             ]
-        ]);
+        ];
 
-        return Inertia::location($payment->pay());
+        $redirect_url = $payment->arguments($args)->pay();
+
+        return Inertia::location($redirect_url);
     }
 }

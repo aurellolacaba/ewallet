@@ -10,9 +10,9 @@ class Payment {
     private PaymentMethod $payment_strategy;
     private $arguments = NULL;
 
-    public function __construct(string $payment_method){
+    public function __construct(string $payment_method = 'paypal'){
         $strategy_lookup = [
-            'paypal' => new Paypal
+            'paypal' => app(Paypal::class)
         ];
 
         $this->payment_strategy = $strategy_lookup[$payment_method] ??
@@ -21,6 +21,8 @@ class Payment {
 
     public function arguments(array $args) {
         $this->arguments = $args;
+
+        return $this;
     }
 
     public function pay() {
