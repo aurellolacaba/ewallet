@@ -16,12 +16,7 @@ class PaymentTest extends TestCase
     /** @test */
     public function should_return_redirect_url_to_paypal(): void
     {
-        $this->mock(
-            Paypal::class, function (MockInterface $mock) {
-                $mock->shouldReceive('pay')->andReturns('https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R'); 
-        });
-
-        $payment = new PaymentService('paypal');
+        $payment_method = 'paypal';
         $args = [
             'amount' => 100,
             'billing' => [
@@ -32,8 +27,17 @@ class PaymentTest extends TestCase
                 'reference_id' => 'd9f80740-38f0-11e8-b467-0ed5f89f718b'
             ]
         ];
-        $redirect_url = $payment->arguments($args)
-            ->pay();
+
+        $this->mock(
+            Paypal::class, 
+            function (MockInterface $mock) {
+                $mock->shouldReceive('pay')
+                    ->once()
+                    ->andReturns('https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R'); 
+            }
+        );
+
+        $redirect_url = (new PaymentService($payment_method))->arguments($args)->pay();
 
         $this->assertEquals(
             'https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R', 
