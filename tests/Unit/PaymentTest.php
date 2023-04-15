@@ -27,20 +27,21 @@ class PaymentTest extends TestCase
                 'reference_id' => 'd9f80740-38f0-11e8-b467-0ed5f89f718b'
             ]
         ];
+        $fake_redirect_url = 'https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R';
 
         $this->mock(
             Paypal::class, 
-            function (MockInterface $mock) {
+            function (MockInterface $mock) use ($fake_redirect_url) {
                 $mock->shouldReceive('pay')
                     ->once()
-                    ->andReturns('https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R'); 
+                    ->andReturns($fake_redirect_url); 
             }
         );
 
         $redirect_url = (new PaymentService($payment_method))->arguments($args)->pay();
 
         $this->assertEquals(
-            'https://www.sandbox.paypal.com/checkoutnow?token=60W5210888054561R', 
+            $fake_redirect_url, 
             $redirect_url
         );
     }
