@@ -24,10 +24,9 @@ jobs:
       run: |
         npm install
         composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
-
+    
     - name: Build assets
-      env: LARAVEL_BYPASS_ENV_CHECK: '1'
-      run: npm run dev
+      run: npm run build
     
     - name: Generate key
       run: php artisan key:generate
