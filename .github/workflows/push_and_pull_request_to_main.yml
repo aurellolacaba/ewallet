@@ -26,7 +26,8 @@ jobs:
         composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
     
     - name: Set environment variables
-      env: LARAVEL_BYPASS_ENV_CHECK: 1
+      env:
+        LARAVEL_BYPASS_ENV_CHECK: 1
 
     - name: Build assets
       run: npm run dev
