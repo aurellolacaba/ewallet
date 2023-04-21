@@ -40,10 +40,10 @@ jobs:
         touch database/database.sqlite
     
     - name: Run database migrations
-      run: php artisan migrate --force
-    
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
+      run: php artisan migrate --force
+    
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: php artisan test
